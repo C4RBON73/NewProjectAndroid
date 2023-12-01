@@ -1,12 +1,14 @@
 package com.example.newprojectandroid.ui.gallery
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.newprojectandroid.Api
 import com.example.newprojectandroid.databinding.FragmentGalleryBinding
 
 class GalleryFragment : Fragment() {
@@ -23,7 +25,7 @@ class GalleryFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         val galleryViewModel =
-                ViewModelProvider(this).get(GalleryViewModel::class.java)
+            ViewModelProvider(this)[GalleryViewModel::class.java]
 
         _binding = FragmentGalleryBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -32,6 +34,9 @@ class GalleryFragment : Fragment() {
         galleryViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+        Log.d("Test", "testAPI")
+        val api = Api(context)
+        api.get(null)
         return root
     }
 
